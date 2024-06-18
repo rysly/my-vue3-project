@@ -1,12 +1,13 @@
 # my-vue3-project 开发须知
 
-## 项目主要使用 uni-app + vue3 + vite3 + typescript + pinia + uv-ui + Tailwind css
+## 项目主要使用 uni-app + vue3 + vite3 + typescript + pinia + uv-ui + Tailwind css + prerttier + eslint + stylelint
 
 ## 建议使用 node18+ 或node20 环境开发，使用 yarn 下载安装包
 
 ## 脚手架搭建
 
 - [项目搭建参考](https://zhuanlan.zhihu.com/p/676624807)
+- [项目搭建参考:代码规范+git提交规范+pinia存储持久化](https://zhuanlan.zhihu.com/p/684621219)
 - [node](http://nodejs.org/) and [git](https://git-scm.com/)
 - [uni-app工程化](https://uniapp.dcloud.net.cn/quickstart-cli.html#install-vue-cli)
 - [vue3](https://cn.vuejs.org/api/composition-api-setup.html)
@@ -14,6 +15,7 @@
 - [TypeScript](https://www.typescriptlang.org/)
 - [pinia](https://pinia.web3doc.top/)
 - [UI 框架选型](https://juejin.cn/post/7337513012393607207)
+- [uv-ui](https://www.uvui.cn/components/skeletons.html)
 - [tailwindcss](https://tailwindcss.com/) - 方便的写 css
 
 ## Install and use
@@ -68,3 +70,6 @@ git reset --soft 266a026 (commit撤回)
 ```
 
 ## 知识积累
+- [项目搭建参考:代码规范+git提交规范+pinia存储持久化](https://zhuanlan.zhihu.com/p/684621219)
+- 分页面router
+- 引用luch-request
