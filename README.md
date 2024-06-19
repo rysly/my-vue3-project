@@ -74,4 +74,4 @@ git reset --soft 266a026 (commit撤回)
 ## 知识积累
 - [项目搭建参考:代码规范+git提交规范+pinia存储持久化](https://zhuanlan.zhihu.com/p/684621219)
 - 分页面router
-- 引用luch-request
+- [web-view小程序内嵌网页](https://zh.uniapp.dcloud.io/component/web-view.html)

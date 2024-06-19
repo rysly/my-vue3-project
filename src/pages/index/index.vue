@@ -27,6 +27,10 @@
 
     <uv-notify ref="notify"></uv-notify>
 
+    <uv-button type="primary" @click="linkOther">外链</uv-button>
+
+    <web-view v-if="isShowWebView" :src="linkVal"></web-view>
+
   </view>
 </template>
 
@@ -58,7 +62,7 @@ const rulesInfo = reactive({
     },
     {
 			pattern: /^[a-zA-Z]{5,9}$/,
-			transform(value) {
+			transform(value:any) {
 				return String(value);
 			},
 			message: '只能包含5-9位字母'
@@ -88,7 +92,7 @@ const rulesInfo = reactive({
 			message: '长度在6-20个字符之间'
 		},
     {
-      validator: (rule, value, callback) => {
+      validator: (rule:any, value:any, callback:any) => {
         if(value === formInfo.password) {
           return true;
         } else {
@@ -146,6 +150,16 @@ const loginRegister = () => {
   isRegister.value = !isRegister.value
   formInfo.repassword = undefined
 }
+
+const isShowWebView = ref(false)
+const linkVal = ref("")
+const linkOther = () => {
+  isShowWebView.value = true
+  linkVal.value = "https://www.baidu.com/"
+}
+
+
+
 
 </script>
 
