@@ -59,6 +59,7 @@
     "@dcloudio/uni-ui": "^1.5.5",
     "@uni-helper/vite-plugin-uni-tailwind": "^0.15.0",
     "autoprefixer": "^10.4.19",
+    "luch-request": "^3.1.1",
     "pinia": "2.0.36",
     "postcss": "^8.4.38",
     "postcss-comment": "^2.0.0",

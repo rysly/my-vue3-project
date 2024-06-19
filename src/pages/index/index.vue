@@ -1,28 +1,39 @@
 <template>
   <view class="content">
 
-
     <!-- <text>Current Count: {{ counter.count }}</text> -->
 
-
     <!-- <text class="text-3xl font-bold underline">ruijing</text> -->
+    
+    <view>
+      <uv-form ref="formRef" :model="formInfo" :rules="rulesInfo">
+        <uv-form-item label="" prop="name">
+          <uv-input v-model="formInfo.name" placeholder="请输入姓名" />
+        </uv-form-item>
+        <uv-form-item label="" prop="password">
+          <uv-input v-model="formInfo.password" placeholder="请输入密码" />
+        </uv-form-item>
+        <uv-form-item label="" prop="repassword" v-if="isRegister">
+          <uv-input v-model="formInfo.repassword" placeholder="请再次输入密码" />
+        </uv-form-item>
+      </uv-form>
+      <view class="mt-[16px]">
+        <uv-button type="primary" @click="loginBtn">{{ isRegister?'注册':'登陆' }}</uv-button>
+      </view>
+      <view class="mt-[12px] float-right text-[#3c9cff] text-[14px]" @click="loginRegister">
+        {{ isRegister?'登陆账号':'注册新账号' }}
+      </view>
+    </view>
 
-
-		<uv-form ref="formRef" :model="formInfo" :rules="rulesInfo">
-      <uv-form-item label="姓名" prop="username">
-				<uv-input v-model="formInfo.username" placeholder="请输入姓名" />
-			</uv-form-item>
-      <uv-form-item label="密码" prop="password">
-				<uv-input v-model="formInfo.password" placeholder="请输入密码" />
-			</uv-form-item>
-		</uv-form>
-		<uv-button type="primary" @click="loginBtn">登陆</uv-button>
+    <uv-notify ref="notify"></uv-notify>
 
   </view>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
+import { onReady } from '@dcloudio/uni-app'  
+import { userLogin, userRegister } from "@/api/login";
 // import { useCounterStore } from '@/stores/counter';
 
 // const counter = useCounterStore();
@@ -33,17 +44,25 @@ import { ref, reactive } from 'vue';
 const formRef = ref()
 
 const formInfo = reactive({
-	username: '',
-  password: ''
+	name: '',
+  password: '',
+  repassword: undefined
 })
 
 const rulesInfo = reactive({
-  'username': [
+  'name': [
     {
       required: true,
       message: '请输入姓名',
       trigger: ['blur', 'change']
-    }
+    },
+    {
+			pattern: /^[a-zA-Z]{5,9}$/,
+			transform(value) {
+				return String(value);
+			},
+			message: '只能包含5-9位字母'
+		}
   ],
   'password': [
     {
@@ -52,22 +71,80 @@ const rulesInfo = reactive({
       trigger: ['blur', 'change']
     },
     {
-      validator: () => { // rule, value, callback
-        return true;
+			min: 6,
+			max: 20,
+			message: '长度在6-20个字符之间'
+		}
+  ],
+  'repassword': [
+    {
+      required: true,
+      message: '请再次输入密码',
+      trigger: ['blur', 'change']
+    },
+    {
+			min: 6,
+			max: 20,
+			message: '长度在6-20个字符之间'
+		},
+    {
+      validator: (rule, value, callback) => {
+        if(value === formInfo.password) {
+          return true;
+        } else {
+          return false;
+        }
       },
-      message: '电话号码格式错误',
+      message: '两次输入密码不一致',
       trigger: ['blur']
     }
   ]
 })
 
+const notify = ref()
+
+// onReady(()=>{
+//   notify.value.show()
+// })
+
 const loginBtn = () => {
   formRef.value.validate().then(() => {
-    console.log(11111, formInfo);
-    uni.showToast({ icon: 'success', title: '校验通过'})
+
+
+    if(!isRegister.value) {
+      userLogin(formInfo).then((res) => {
+        if (res.data.code === 200) {
+          notify.value.success('success');
+          // notify.value.show({
+          //   type: 'success',
+          //   message: 'success'
+          // });
+        } else {
+          notify.value.error(res.data.msg);
+        }
+      }).finally(() => {
+      });
+    } else {
+      userRegister(formInfo).then((res) => {
+        if (res.data.code === 200) {
+          notify.value.success('success');
+        } else {
+          notify.value.error(res.data.msg);
+        }
+      }).finally(() => {
+      });
+    }
+
+
   }).catch(() => {
-    uni.showToast({ icon: 'error', title: '校验失败'})
+    // notify.value.error('校验失败');
   })
+}
+
+const isRegister = ref(false)
+const loginRegister = () => {
+  isRegister.value = !isRegister.value
+  formInfo.repassword = undefined
 }
 
 </script>
@@ -78,5 +155,15 @@ const loginBtn = () => {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-top: -200px;
+  margin-bottom: 0;
+}
+.uv-form-item__body__right__message {
+  margin-left: 0 !important;
 }
 </style>

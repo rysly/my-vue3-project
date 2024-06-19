@@ -1004,6 +1004,11 @@
   resolved "https://mirrors.huaweicloud.com/repository/npm/@climblee/uv-ui/-/uv-ui-1.1.20.tgz#52edd6948c8b62284c89b611401a21f523cf5f54"
   integrity sha512-jkyesHJsPJkF4Nap9ZmG1/ibKlxXA5M8+ntqKXwwloIsYSYL5SOKb0gyPj17aBOU1PkJpmeiZ8PwnTolhK2/HA==
 
+"@dcloudio/types@^2.0.16":
+  version "2.6.12"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/@dcloudio/types/-/types-2.6.12.tgz#6c9559b9e65483f355dd61cb88fe8c14c8e61189"
+  integrity sha512-mrCMwcINy1IFjU9VUqLeWBkj404yWs5paLDttBcA+eqUjanuUQbBcTVPqlrGgkyzLXDcV2oDDZRSNxNpXi4kMQ==
+
 "@dcloudio/types@^3.4.8":
   version "3.4.8"
   resolved "https://mirrors.huaweicloud.com/repository/npm/@dcloudio/types/-/types-3.4.8.tgz#97eab3fde7e8a55c11a7f4422f2f9bf0efb4d49c"
@@ -2071,9 +2076,9 @@
   integrity sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==
 
 "@types/node@^20.14.2":
-  version "20.14.4"
-  resolved "https://mirrors.huaweicloud.com/repository/npm/@types/node/-/node-20.14.4.tgz#3426db474378502882036d595ec9e79a9b17d1e6"
-  integrity sha512-1ChboN+57suCT2t/f8lwtPY/k3qTpuD/qnqQuYoBg6OQOcPyaw7PiZVdGpaZYAvhDDtqrt0oAaM8+oSu1xsUGw==
+  version "20.14.5"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/@types/node/-/node-20.14.5.tgz#fe35e3022ebe58b8f201580eb24e1fcfc0f2487d"
+  integrity sha512-aoRR+fJkZT2l0aGOJhuA8frnCSoNX6W7U2mpNq63+BxBIj5BQFt8rHy627kijCmm63ijdSdwvGgpUsU6MBsZZA==
   dependencies:
     undici-types "~5.26.4"
 
@@ -2853,9 +2858,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.4.796:
-  version "1.4.803"
-  resolved "https://mirrors.huaweicloud.com/repository/npm/electron-to-chromium/-/electron-to-chromium-1.4.803.tgz#cf55808a5ee12e2a2778bbe8cdc941ef87c2093b"
-  integrity sha512-61H9mLzGOCLLVsnLiRzCbc63uldP0AniRYPV3hbGVtONA1pI7qSGILdbofR7A8TMbOypDocEAjH/e+9k1QIe3g==
+  version "1.4.805"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/electron-to-chromium/-/electron-to-chromium-1.4.805.tgz#1d526e384c20944a3c68f618f9774edc384c4733"
+  integrity sha512-8W4UJwX/w9T0QSzINJckTKG6CYpAUTqsaWcWIsdud3I1FYJcMgW9QqT1/4CBff/pP/TihWh13OmiyY8neto6vw==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -3425,9 +3430,9 @@ lcid@^3.0.0:
     invert-kv "^3.0.0"
 
 licia@^1.29.0:
-  version "1.40.0"
-  resolved "https://mirrors.huaweicloud.com/repository/npm/licia/-/licia-1.40.0.tgz#516cf6934f91a4b6cc08cf061f2ce8562076d880"
-  integrity sha512-iNujT47WfM7NTHOhxnXUdvW2ELAXNuViJZaLimId6a6b++5VQmse042Wkrx774KoYvVwD98qbdEtS3CWaAzzFQ==
+  version "1.41.0"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/licia/-/licia-1.41.0.tgz#43c0a6afe2053b4a1320ceee778dc60adff2ca6f"
+  integrity sha512-ByZNnAcROO2FJyL2UU0uERC/boE14UCPNYixs7B5PI8kcPOPCgsI0iLjkfhQgiI5M5fNp6TOvbr87EPBR7lw7Q==
 
 lilconfig@^2.0.5, lilconfig@^2.1.0:
   version "2.1.0"
@@ -3502,6 +3507,13 @@ lru-cache@^5.1.1:
   integrity sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==
   dependencies:
     yallist "^3.0.2"
+
+luch-request@^3.1.1:
+  version "3.1.1"
+  resolved "https://mirrors.huaweicloud.com/repository/npm/luch-request/-/luch-request-3.1.1.tgz#a62b0aab54c5acd9da5b5fd0564ed2cdb8af9c2f"
+  integrity sha512-p7+mlcEtgRcd0OfXC4XZbyiwSr1XgCeqNT7LlVUjnk7InYl/8d5Rk7BUqAYNA2WRafI1wRIUQWRWZRpeUwWR0w==
+  dependencies:
+    "@dcloudio/types" "^2.0.16"
 
 magic-string@^0.30.0, magic-string@^0.30.1, magic-string@^0.30.10, magic-string@^0.30.5:
   version "0.30.10"
