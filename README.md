@@ -74,7 +74,8 @@ git reset --soft 266a026 (commit撤回)
 ```
 
 ## 知识积累
-- [项目搭建参考:代码规范+git提交规范+pinia存储持久化](https://zhuanlan.zhihu.com/p/684621219)
 - [web-view小程序内嵌网页](https://zh.uniapp.dcloud.io/component/web-view.html)
 - [git提交的问题](https://www.cnblogs.com/runningGY/p/15147879.html)
-- 分页面router
+
+
+- [项目搭建参考:代码规范+git提交规范+pinia存储持久化](https://zhuanlan.zhihu.com/p/684621219)

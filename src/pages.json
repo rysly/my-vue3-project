@@ -1,9 +1,52 @@
 {
 	"pages": [
 		{
+			"path": "pages/login/login",
+			"style": {
+				"navigationBarTitleText": "",
+        "navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": ""
+				"navigationBarTitleText": "lighting AI",
+        "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/manage",
+			"style": {
+				"navigationBarTitleText": "",
+        "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/newArticle",
+			"style": {
+				"navigationBarTitleText": "",
+        "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/recommendedArticle",
+			"style": {
+				"navigationBarTitleText": "",
+        "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/tool",
+			"style": {
+				"navigationBarTitleText": "",
+        "navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/index/me",
+			"style": {
+				"navigationBarTitleText": "",
+        "navigationStyle": "custom"
 			}
 		}
 	],
