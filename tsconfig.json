@@ -13,5 +13,13 @@
     ],
     "ignoreDeprecations": "5.0"
   },
-  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue", "src/api/login.ts", "src/utils/request.ts"]
+  "include": [
+    "src/*.ts",
+    "src/**/*.ts", 
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "src/api/login.ts",
+    "src/utils/request.ts"
+  ]
 }

@@ -7,6 +7,8 @@
 ## 脚手架搭建
 
 - [接口管理](https://space-0v29ag.w.eolink.com/home/api-studio/?spaceKey=space-0v29ag&projectGroup=0&projectType=0&testId=1718688225436&module=-99)
+- [服务器购买](https://activity.huaweicloud.com/618_promotion/index.html)
+
 - [项目搭建参考](https://zhuanlan.zhihu.com/p/676624807)
 - [项目搭建参考:代码规范+git提交规范+pinia存储持久化](https://zhuanlan.zhihu.com/p/684621219)
 - [node](http://nodejs.org/) and [git](https://git-scm.com/)

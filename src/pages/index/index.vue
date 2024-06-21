@@ -3,9 +3,8 @@
 
     <!-- <text>Current Count: {{ counter.count }}</text> -->
 
-    <!-- <text class="text-3xl font-bold underline">ruijing</text> -->
-    
     <view>
+      <view class="text-2xl font-bold pb-[16px] text-center">知识库小程序</view>
       <uv-form ref="formRef" :model="formInfo" :rules="rulesInfo">
         <uv-form-item label="" prop="name">
           <uv-input v-model="formInfo.name" placeholder="请输入姓名" />
@@ -27,9 +26,8 @@
 
     <uv-notify ref="notify"></uv-notify>
 
-    <uv-button type="primary" @click="linkOther">外链</uv-button>
-
-    <web-view v-if="isShowWebView" :src="linkVal"></web-view>
+    <!-- <uv-button type="primary" @click="linkOther">外链</uv-button> -->
+    <!-- <web-view v-if="isShowWebView" :src="linkVal"></web-view> -->
 
   </view>
 </template>
@@ -107,22 +105,14 @@ const rulesInfo = reactive({
 
 const notify = ref()
 
-// onReady(()=>{
-//   notify.value.show()
-// })
-
 const loginBtn = () => {
   formRef.value.validate().then(() => {
-
 
     if(!isRegister.value) {
       userLogin(formInfo).then((res) => {
         if (res.data.code === 200) {
           notify.value.success('success');
-          // notify.value.show({
-          //   type: 'success',
-          //   message: 'success'
-          // });
+          // .....
         } else {
           notify.value.error(res.data.msg);
         }
@@ -132,6 +122,7 @@ const loginBtn = () => {
       userRegister(formInfo).then((res) => {
         if (res.data.code === 200) {
           notify.value.success('success');
+          // .....
         } else {
           notify.value.error(res.data.msg);
         }
@@ -151,12 +142,12 @@ const loginRegister = () => {
   formInfo.repassword = undefined
 }
 
-const isShowWebView = ref(false)
-const linkVal = ref("")
-const linkOther = () => {
-  isShowWebView.value = true
-  linkVal.value = "https://www.baidu.com/"
-}
+// const isShowWebView = ref(false)
+// const linkVal = ref("")
+// const linkOther = () => {
+//   isShowWebView.value = true
+//   linkVal.value = "https://www.baidu.com/"
+// }
 
 
 
