@@ -1,15 +1,19 @@
 <template>
-  <view class="content">
+  <view class="tool">
+    <leftpop title="软件工具"></leftpop>
+
+
     软件工具
   </view>
 </template>
 
 <script setup lang="ts">
+  import leftpop from '../../components/leftPop.vue'
 
 </script>
 
-<style lang="scss">
-.content {
+<style lang="scss" scoped>
+.tool {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +23,5 @@
   bottom: 0;
   left: 0;
   right: 0;
-  margin-top: -200px;
-  margin-bottom: 0;
 }
 </style>

@@ -20,6 +20,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/api/login.ts",
+    "src/api/ai.ts",
     "src/utils/request.ts"
   ]
 }

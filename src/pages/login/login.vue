@@ -4,22 +4,22 @@
     <!-- <text>Current Count: {{ counter.count }}</text> -->
 
     <view>
-      <view class="text-2xl font-bold pb-[16px] text-center">知识库小程序</view>
+      <view class="text-2xl font-bold pb-[32rpx] text-center">知识库小程序</view>
       <uv-form ref="formRef" :model="formInfo" :rules="rulesInfo">
         <uv-form-item label="" prop="name">
-          <uv-input v-model="formInfo.name" placeholder="请输入姓名" />
+          <uv-input v-model="formInfo.name" placeholder="请输入姓名" customStyle="border-color: #333 !important" />
         </uv-form-item>
         <uv-form-item label="" prop="password">
-          <uv-input v-model="formInfo.password" placeholder="请输入密码" />
+          <uv-input v-model="formInfo.password" placeholder="请输入密码" customStyle="border-color: #333 !important" />
         </uv-form-item>
         <uv-form-item label="" prop="repassword" v-if="isRegister">
-          <uv-input v-model="formInfo.repassword" placeholder="请再次输入密码" />
+          <uv-input v-model="formInfo.repassword" placeholder="请再次输入密码" customStyle="border-color: #333 !important" />
         </uv-form-item>
       </uv-form>
-      <view class="mt-[16px]">
-        <uv-button type="primary" @click="loginBtn">{{ isRegister?'注册':'登陆' }}</uv-button>
+      <view class="mt-[32rpx]">
+        <uv-button type="primary" :custom-style="{borderRadius: '80rpx'}" @click="loginBtn">{{ isRegister?'注册':'登陆' }}</uv-button>
       </view>
-      <view class="mt-[12px] float-right text-[#3c9cff] text-[14px]" @click="loginChangeRegister">
+      <view class="mt-[24rpx] float-right text-[#3c9cff] text-[28rpx]" @click="loginChangeRegister">
         {{ isRegister?'登陆账号':'注册新账号' }}
       </view>
     </view>
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
-import { onReady } from '@dcloudio/uni-app'  
+import { onReady } from '@dcloudio/uni-app'
 import { userLogin, userRegister } from "@/api/login";
 // import { useCounterStore } from '@/stores/counter';
 
@@ -106,13 +106,12 @@ const rulesInfo = reactive({
 const notify = ref()
 
 const loginBtn = () => {
+  // uni.redirectTo({ url: '/pages/index/ai' });
   formRef.value.validate().then(() => {
-
     if(!isRegister.value) {
       userLogin(formInfo).then((res) => {
         if (res.data.code === 200) {
-          // notify.value.success('success');
-          uni.redirectTo({ url: '/pages/index/index' });
+          uni.redirectTo({ url: '/pages/index/ai' });
         } else {
           notify.value.error(res.data.msg);
         }
@@ -121,16 +120,13 @@ const loginBtn = () => {
     } else {
       userRegister(formInfo).then((res) => {
         if (res.data.code === 200) {
-          // notify.value.success('success');
-          uni.redirectTo({ url: '/pages/index/index' });
+          uni.redirectTo({ url: '/pages/index/ai' });
         } else {
           notify.value.error(res.data.msg);
         }
       }).finally(() => {
       });
     }
-
-
   }).catch(() => {
     // notify.value.error('校验失败');
   })
@@ -155,6 +151,12 @@ const loginChangeRegister = () => {
 </script>
 
 <style lang="scss">
+  .uv-form-item__body__right__message {
+    margin-left: 0 !important;
+  }
+</style>
+
+<style lang="scss" scoped>
 .content {
   display: flex;
   flex-direction: column;
@@ -165,10 +167,10 @@ const loginChangeRegister = () => {
   bottom: 0;
   left: 0;
   right: 0;
-  margin-top: -200px;
-  margin-bottom: 0;
+  // margin-top: 0;
+  // margin-bottom: 0;
 }
-.uv-form-item__body__right__message {
-  margin-left: 0 !important;
+.uv-button button {
+  border-radius: 80rpx;
 }
 </style>

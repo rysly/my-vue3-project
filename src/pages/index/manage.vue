@@ -1,19 +1,21 @@
 <template>
-  <view class="content">
-    <view @click="goback">Back</view>
+  <view class="manage">
+    <leftpop title="文章管理"></leftpop>
+    
 
-    管理
+    文章管理
+
+
   </view>
 </template>
 
 <script setup lang="ts">
-  const goback = () => {
-    uni.redirectTo({ url: '/pages/index/index' });
-  }
+  import leftpop from '../../components/leftPop.vue'
+
 </script>
 
-<style lang="scss">
-.content {
+<style lang="scss" scoped>
+.manage {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -23,7 +25,5 @@
   bottom: 0;
   left: 0;
   right: 0;
-  margin-top: -200px;
-  margin-bottom: 0;
 }
 </style>

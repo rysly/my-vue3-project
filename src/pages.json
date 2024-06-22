@@ -8,7 +8,7 @@
 			}
 		},
 		{
-			"path": "pages/index/index",
+			"path": "pages/index/ai",
 			"style": {
 				"navigationBarTitleText": "lighting AI",
         "navigationStyle": "custom"

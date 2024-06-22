@@ -9,6 +9,7 @@ httpService.interceptors.request.use(
   (config) => {
     if (config && config.header) {
       config.header['Access-Control-Allow-Origin'] = '*'
+	    config.header['Authorization'] = '7b47647f438d48269fc1ca3c30d20da2' // '7b47647f438d48269fc1ca3c30d20da2'
     }
     return config
   },
