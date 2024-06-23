@@ -1,6 +1,7 @@
 <template>
   <view class="newarticle">
     <leftpop title="最新文章"></leftpop>
+    <uv-notify ref="notify"></uv-notify>
 
 
     最新文章
@@ -8,7 +9,23 @@
 </template>
 
 <script setup lang="ts">
+  import { ref, onMounted } from 'vue';
   import leftpop from '../../components/leftPop.vue'
+  import { queryNewArticle } from "@/api/newArticle";
+
+  const notify = ref()
+
+  onMounted(() => {
+    queryNewArticle({}).then((res) => {
+      if (res.data.code === 200) {
+        console.log(111111, res.data)
+      } else {
+        notify.value.error(res.data.msg);
+      }
+    }).finally(() => {
+    });
+  })
+
 
 </script>
 

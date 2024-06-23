@@ -15,7 +15,7 @@
 			}
 		},
 		{
-			"path": "pages/index/manage",
+			"path": "pages/index/fileManage",
 			"style": {
 				"navigationBarTitleText": "",
         "navigationStyle": "custom"

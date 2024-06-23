@@ -1,6 +1,6 @@
 <template>
   <view>
-    
+
 		<uv-navbar :title="title" @leftClick="showLeftPop">
       <template v-slot:left>
 				<view>
@@ -13,7 +13,7 @@
 		<uv-popup ref="popup">
 			<view class="pt-[80rpx] w-[500rpx]">
         <view class="p-[32rpx]" @click="toJump('ai')">lighting AI</view>
-        <view class="p-[32rpx]" @click="toJump('manage')">文章管理</view>
+        <view class="p-[32rpx]" @click="toJump('fileManage')">文章管理</view>
         <uv-collapse :value="collapseVal" ref="collapse">
           <uv-collapse-item title="文章与教程" name="a">
             <view class="p-[32rpx]" @click="toJump('newArticle')">最新文章</view>
@@ -30,16 +30,16 @@
 </template>
 
 <script setup lang="ts">
-  import { ref } from 'vue'
+  import { ref, toRefs } from 'vue'
 
-  const toJump = (type) => {
-    let toUrl
+  const toJump = (type:string) => {
+    let toUrl = ''
     switch (type) {
       case 'ai':
         toUrl = '/pages/index/ai'
         break
-      case 'manage':
-        toUrl = '/pages/index/manage'
+      case 'fileManage':
+        toUrl = '/pages/index/fileManage'
         break
       case 'newArticle':
         toUrl = '/pages/index/newArticle'
@@ -65,17 +65,17 @@
   // })
   // const emits = defineEmits(['close'])
   // emits('close')
-  
+
   const showLeftPop = () => {
     popup.value.open('left')
     // collapse.value.init()
     collapseVal.value = ['a']
   }
 
-  const props = defineProps({
-    title: String,
-    required: true
-  })
+  const props = defineProps<{
+    title: String
+  }>()
+  const { title } = toRefs(props)
 
 </script>
 

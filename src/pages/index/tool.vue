@@ -1,6 +1,7 @@
 <template>
   <view class="tool">
     <leftpop title="软件工具"></leftpop>
+    <uv-notify ref="notify"></uv-notify>
 
 
     软件工具
@@ -8,7 +9,22 @@
 </template>
 
 <script setup lang="ts">
+  import { ref, onMounted } from 'vue';
   import leftpop from '../../components/leftPop.vue'
+  import { queryArticle } from "@/api/fileManage";
+
+  const notify = ref()
+
+  onMounted(() => {
+    queryArticle({articleType: '软件工具'}).then((res) => {
+      if (res.data.code === 200) {
+        console.log(111111, res.data)
+      } else {
+        notify.value.error(res.data.msg);
+      }
+    }).finally(() => {
+    });
+  })
 
 </script>
 

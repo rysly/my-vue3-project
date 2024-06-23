@@ -1,7 +1,6 @@
 <template>
   <view class="content">
-
-    <!-- <text>Current Count: {{ counter.count }}</text> -->
+    <uv-notify ref="notify"></uv-notify>
 
     <view>
       <view class="text-2xl font-bold pb-[32rpx] text-center">知识库小程序</view>
@@ -24,11 +23,9 @@
       </view>
     </view>
 
-    <uv-notify ref="notify"></uv-notify>
-
+    <!-- <text>Current Count: {{ counter.count }}</text> -->
     <!-- <uv-button type="primary" @click="linkOther">外链</uv-button> -->
     <!-- <web-view v-if="isShowWebView" :src="linkVal"></web-view> -->
-
   </view>
 </template>
 
@@ -106,30 +103,30 @@ const rulesInfo = reactive({
 const notify = ref()
 
 const loginBtn = () => {
-  // uni.redirectTo({ url: '/pages/index/ai' });
-  formRef.value.validate().then(() => {
-    if(!isRegister.value) {
-      userLogin(formInfo).then((res) => {
-        if (res.data.code === 200) {
-          uni.redirectTo({ url: '/pages/index/ai' });
-        } else {
-          notify.value.error(res.data.msg);
-        }
-      }).finally(() => {
-      });
-    } else {
-      userRegister(formInfo).then((res) => {
-        if (res.data.code === 200) {
-          uni.redirectTo({ url: '/pages/index/ai' });
-        } else {
-          notify.value.error(res.data.msg);
-        }
-      }).finally(() => {
-      });
-    }
-  }).catch(() => {
-    // notify.value.error('校验失败');
-  })
+  uni.redirectTo({ url: '/pages/index/ai' });
+  // formRef.value.validate().then(() => {
+  //   if(!isRegister.value) {
+  //     userLogin(formInfo).then((res) => {
+  //       if (res.data.code === 200) {
+  //         uni.redirectTo({ url: '/pages/index/ai' });
+  //       } else {
+  //         notify.value.error(res.data.msg);
+  //       }
+  //     }).finally(() => {
+  //     });
+  //   } else {
+  //     userRegister(formInfo).then((res) => {
+  //       if (res.data.code === 200) {
+  //         uni.redirectTo({ url: '/pages/index/ai' });
+  //       } else {
+  //         notify.value.error(res.data.msg);
+  //       }
+  //     }).finally(() => {
+  //     });
+  //   }
+  // }).catch(() => {
+  //   // notify.value.error('校验失败');
+  // })
 }
 
 const isRegister = ref(false)
