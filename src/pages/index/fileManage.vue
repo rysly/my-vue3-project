@@ -59,7 +59,7 @@
 
 
           <uv-form-item label="文件内容" prop="articleContent">
-            <uv-textarea v-model="formInfo.articleContent" placeholder="请输入文件内容"></uv-textarea>
+            <uv-textarea v-model="formInfo.articleContent" placeholder="请输入文件内容" count :maxlength="15000"></uv-textarea>
           </uv-form-item>
         </uv-form>
       </view>
@@ -125,7 +125,7 @@
         trigger: ['blur', 'change']
       },
       {
-        max: 1500,
+        max: 15000,
         message: '长度限制在15000以内'
       }
     ]

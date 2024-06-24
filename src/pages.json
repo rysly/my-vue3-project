@@ -25,28 +25,28 @@
 			"path": "pages/index/newArticle",
 			"style": {
 				"navigationBarTitleText": "",
-        "navigationStyle": "custom"
+        		"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/index/recommendedArticle",
 			"style": {
 				"navigationBarTitleText": "",
-        "navigationStyle": "custom"
+        		"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/index/tool",
 			"style": {
 				"navigationBarTitleText": "",
-        "navigationStyle": "custom"
+        		"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/index/me",
 			"style": {
 				"navigationBarTitleText": "",
-        "navigationStyle": "custom"
+        		"navigationStyle": "custom"
 			}
 		}
 	],
