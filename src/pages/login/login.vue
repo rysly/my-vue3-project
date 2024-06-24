@@ -9,10 +9,10 @@
           <uv-input v-model="formInfo.name" placeholder="请输入姓名" customStyle="border-color: #333 !important" />
         </uv-form-item>
         <uv-form-item label="" prop="password">
-          <uv-input v-model="formInfo.password" placeholder="请输入密码" customStyle="border-color: #333 !important" />
+          <uv-input :password="true" v-model="formInfo.password" placeholder="请输入密码" customStyle="border-color: #333 !important" />
         </uv-form-item>
         <uv-form-item label="" prop="repassword" v-if="isRegister">
-          <uv-input v-model="formInfo.repassword" placeholder="请再次输入密码" customStyle="border-color: #333 !important" />
+          <uv-input :password="true" v-model="formInfo.repassword" placeholder="请再次输入密码" customStyle="border-color: #333 !important" />
         </uv-form-item>
       </uv-form>
       <view class="mt-[32rpx]">

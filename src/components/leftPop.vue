@@ -14,7 +14,7 @@
 		<uv-popup ref="popup">
 			<view class="pt-[80rpx] w-[500rpx]">
         <view class="p-[32rpx]" @click="toJump('ai')">lighting AI</view>
-        <view class="p-[32rpx]" @click="toJump('fileManage')">文章管理</view>
+        <view class="p-[32rpx]" v-if="role === 2" @click="toJump('fileManage')">文章管理</view>
         <uv-collapse :value="collapseVal">
           <uv-collapse-item title="文章与教程" name="a">
             <view class="p-[32rpx]" @click="toJump('newArticle')">最新文章</view>
@@ -75,6 +75,7 @@ import { userInfoStore } from '@/stores/user';
 
   const notify = ref()
   const username = ref()
+  const role = ref() // 1是普通，2是管理员
 
   const emits = defineEmits(['getImg'])
 
@@ -83,14 +84,17 @@ import { userInfoStore } from '@/stores/user';
   onMounted(() => {
     if(userInfo.userList.name) {
       username.value = userInfo.userList.name
+      role.value = userInfo.userList.role
       emits('getImg', userInfo.userList.paramValue)
     } else {
       commonInfo({}).then((res) => {
         if (res.data.code === 200) {
           userInfo.userList.name = res.data.data.name
           userInfo.userList.paramValue = res.data.data.paramValue
+          userInfo.userList.role = res.data.data.role
 
           username.value = res.data.data.name
+          role.value = res.data.data.role
           emits('getImg', res.data.data.paramValue)
         } else {
           notify.value.show({

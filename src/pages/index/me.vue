@@ -15,6 +15,7 @@
   const logOut = () => {
     userInfo.userList.token = ''
     userInfo.userList.name = ''
+    userInfo.userList.role = 1
     userInfo.userList.paramValue = ''
     uni.redirectTo({ url: '/pages/login/login' });
   }

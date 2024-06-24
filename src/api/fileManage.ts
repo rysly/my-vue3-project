@@ -5,7 +5,7 @@ export const insertArticle = (data:any) => {
 };
 
 export const deleteArticle = (params:any) => {
-  return httpService.get('/deleteArticle', { params });
+  return httpService.get('/article/deleteArticle', { params });
 };
 
 export const updateArticle = (data:any) => {

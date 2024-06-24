@@ -38,7 +38,8 @@ export const userInfoStore = defineStore('userInfo',
     const userList = reactive({
       token: '',
       name: '',
-      paramValue: ''
+      role: 1, // 1是普通，2是管理员
+      paramValue: '' // AI界面回答者头像图片
     })
     return { userList }
   },
