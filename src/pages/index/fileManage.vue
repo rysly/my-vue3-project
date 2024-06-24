@@ -15,7 +15,7 @@
         <view class="inline-flex justify-center w-[200rpx]">操作</view>
       </view>
 
-      <view v-for="item in dataList" class="file-list inline-flex items-center py-[12rpx]">
+      <view v-for="(item, index) in dataList" class="file-list inline-flex items-center py-[12rpx]" :key="index">
         <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">{{ item.id }}</view>
         <view class="file-artice inline-block">
           <view class="text-[#3b4144] file-sub">{{ item.title }}</view>
