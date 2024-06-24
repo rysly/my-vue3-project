@@ -1,6 +1,6 @@
 <template>
   <view class="mt-[160rpx] h-[1000rpx]">
-    <leftpop title="lighting AI"></leftpop>
+    <leftpop title="lighting AI" @getImg="getAIImg"></leftpop>
     <uv-notify ref="notify"></uv-notify>
 
     <view style="height: 100%; overflow: auto;">
@@ -10,7 +10,7 @@
         </view>
 
         <view  v-if="item.type === 'AIreply'" class="inline-flex items-start ml-[48rpx] mt-[48rpx]">
-          <uv-image width="48rpx" height="48rpx" :src="srcImg" shape="circle"></uv-image>
+          <uv-image width="48rpx" height="48rpx" :src="linkImg || srcImg" shape="circle"></uv-image>
           <view class="inline-flex justify-start bg-[#dddddd] px-[24rpx] py-[12rpx] ml-[12rpx] mr-[48rpx] rounded-[24rpx]">
             <view class="leading-[52rpx]">{{ item.content }}</view>
           </view>
@@ -35,7 +35,7 @@
   import { ref, reactive } from 'vue'
   import leftpop from '../../components/leftPop.vue'
   import { aiSubmit } from "@/api/ai";
-  import srcImg from '@/static/love.png';
+  import srcImg from '@/static/logo.png';
 
   const valueAI = ref()
 
@@ -46,34 +46,41 @@
     content: string
   }
 
-
   const notify = ref()
   const confirmAI = (val:any) => {
     if(val) {
       valueAI.value = ''
-      if (Array.isArray(dataList)) {
-        dataList.push({
+      if (Array.isArray(dataList.value)) {
+        dataList.value.push({
           type: 'keyInput',
           content: val
         })
       }
       aiSubmit({content: val}).then((res) => {
         if (res.data.code === 200) {
-          console.log(1111111, res.data.msg)
-          if (Array.isArray(dataList)) {
-            dataList.push({
+          if (Array.isArray(dataList.value)) {
+            dataList.value.push({
               type: 'AIreply',
               content: res.data.msg
             })
           }
         } else {
-          notify.value.error(res.data.msg);
+          notify.value.show({
+            type: 'error',
+            message: res.data.msg,
+            duration: 1000 * 3,
+            safeAreaInsetTop: true
+          })
         }
       }).finally(() => {
       });
     }
   }
-  // const srcImg = ref()
+  const linkImg = ref()
+  const getAIImg = (val:string) => {
+    linkImg.value = val
+  }
+  
 </script>
 
 <style lang="scss" scoped>

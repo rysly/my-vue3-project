@@ -1,4 +1,7 @@
 import Request from 'luch-request'
+import { userInfoStore } from '@/stores/user'
+
+const userInfo = userInfoStore()
 
 const httpService = new Request({
   baseURL: 'http://120.46.46.120/', // 121.37.128.28
@@ -9,7 +12,7 @@ httpService.interceptors.request.use(
   (config) => {
     if (config && config.header) {
       config.header['Access-Control-Allow-Origin'] = '*'
-	    config.header['Authorization'] = '7b47647f438d48269fc1ca3c30d20da2' // '7b47647f438d48269fc1ca3c30d20da2'
+	    config.header['Authorization'] = userInfo.userList.token || '' // '7b47647f438d48269fc1ca3c30d20da2'
     }
     return config
   },

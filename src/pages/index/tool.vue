@@ -20,7 +20,12 @@
       if (res.data.code === 200) {
         console.log(111111, res.data)
       } else {
-        notify.value.error(res.data.msg);
+        notify.value.show({
+          type: 'error',
+          message: res.data.msg,
+          duration: 1000 * 3,
+          safeAreaInsetTop: true
+        })
       }
     }).finally(() => {
     });

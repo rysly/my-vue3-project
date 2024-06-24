@@ -1,5 +1,6 @@
 <template>
   <view>
+    <uv-notify ref="notify"></uv-notify>
 
 		<uv-navbar :title="title" @leftClick="showLeftPop">
       <template v-slot:left>
@@ -14,14 +15,14 @@
 			<view class="pt-[80rpx] w-[500rpx]">
         <view class="p-[32rpx]" @click="toJump('ai')">lighting AI</view>
         <view class="p-[32rpx]" @click="toJump('fileManage')">文章管理</view>
-        <uv-collapse :value="collapseVal" ref="collapse">
+        <uv-collapse :value="collapseVal">
           <uv-collapse-item title="文章与教程" name="a">
             <view class="p-[32rpx]" @click="toJump('newArticle')">最新文章</view>
             <view class="p-[32rpx]" @click="toJump('recommendedArticle')">推荐文章</view>
           </uv-collapse-item>
         </uv-collapse>
         <view class="p-[32rpx]" @click="toJump('tool')">软件工具</view>
-        <view class="p-[32rpx] absolute bottom-[32rpx]" @click="toJump('me')">个人用户</view>
+        <view class="p-[32rpx] absolute bottom-[32rpx]" @click="toJump('me')">个人用户: {{ username }}</view>
 			</view>
 		</uv-popup>
 
@@ -30,7 +31,9 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, toRefs } from 'vue'
+  import { ref, toRefs, onMounted } from 'vue';
+import { commonInfo } from "@/api/common";
+import { userInfoStore } from '@/stores/user';
 
   const toJump = (type:string) => {
     let toUrl = ''
@@ -58,17 +61,10 @@
   }
 
   let popup = ref()
-  // let collapse = ref()
   let collapseVal = ref()
-  // onMounted(() => {
-  //   popup.value.open('left')
-  // })
-  // const emits = defineEmits(['close'])
-  // emits('close')
 
   const showLeftPop = () => {
     popup.value.open('left')
-    // collapse.value.init()
     collapseVal.value = ['a']
   }
 
@@ -76,6 +72,39 @@
     title: String
   }>()
   const { title } = toRefs(props)
+
+  const notify = ref()
+  const username = ref()
+
+  const emits = defineEmits(['getImg'])
+
+  const userInfo = userInfoStore()
+
+  onMounted(() => {
+    if(userInfo.userList.name) {
+      username.value = userInfo.userList.name
+      emits('getImg', userInfo.userList.paramValue)
+    } else {
+      commonInfo({}).then((res) => {
+        if (res.data.code === 200) {
+          userInfo.userList.name = res.data.data.name
+          userInfo.userList.paramValue = res.data.data.paramValue
+
+          username.value = res.data.data.name
+          emits('getImg', res.data.data.paramValue)
+        } else {
+          notify.value.show({
+            type: 'error',
+            message: res.data.msg,
+            duration: 1000 * 3,
+            safeAreaInsetTop: true
+          })
+        }
+      }).finally(() => {
+      });
+    }
+  })
+
 
 </script>
 

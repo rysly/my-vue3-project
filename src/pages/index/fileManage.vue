@@ -9,7 +9,7 @@
     </view>
 
     <view class="mt-[32rpx]">
-      <view class="file-list inline-flex items-center h-[90rpx] bg-[#bed2db] font-bold">
+      <view class="file-list inline-flex items-center h-[90rpx] font-bold">
         <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">#</view>
         <view class="file-artice inline-block">文件标题/文件类型</view>
         <view class="inline-flex justify-center w-[200rpx]">操作</view>
@@ -44,7 +44,12 @@
       if (res.data.code === 200) {
         console.log(111111, res.data)
       } else {
-        notify.value.error(res.data.msg);
+        notify.value.show({
+          type: 'error',
+          message: res.data.msg,
+          duration: 1000 * 3,
+          safeAreaInsetTop: true
+        })
       }
     }).finally(() => {
     });

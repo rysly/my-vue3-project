@@ -4,21 +4,21 @@
 			"path": "pages/login/login",
 			"style": {
 				"navigationBarTitleText": "",
-        "navigationStyle": "custom"
+        		"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/index/ai",
 			"style": {
 				"navigationBarTitleText": "lighting AI",
-        "navigationStyle": "custom"
+        		"navigationStyle": "custom"
 			}
 		},
 		{
 			"path": "pages/index/fileManage",
 			"style": {
 				"navigationBarTitleText": "",
-        "navigationStyle": "custom"
+        		"navigationStyle": "custom"
 			}
 		},
 		{

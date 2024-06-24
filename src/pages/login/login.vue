@@ -33,6 +33,7 @@
 import { ref, reactive } from 'vue';
 import { onReady } from '@dcloudio/uni-app'
 import { userLogin, userRegister } from "@/api/login";
+import { userInfoStore } from '@/stores/user';
 // import { useCounterStore } from '@/stores/counter';
 
 // const counter = useCounterStore();
@@ -101,32 +102,49 @@ const rulesInfo = reactive({
 })
 
 const notify = ref()
+const userInfo = userInfoStore()
 
 const loginBtn = () => {
-  uni.redirectTo({ url: '/pages/index/ai' });
-  // formRef.value.validate().then(() => {
-  //   if(!isRegister.value) {
-  //     userLogin(formInfo).then((res) => {
-  //       if (res.data.code === 200) {
-  //         uni.redirectTo({ url: '/pages/index/ai' });
-  //       } else {
-  //         notify.value.error(res.data.msg);
-  //       }
-  //     }).finally(() => {
-  //     });
-  //   } else {
-  //     userRegister(formInfo).then((res) => {
-  //       if (res.data.code === 200) {
-  //         uni.redirectTo({ url: '/pages/index/ai' });
-  //       } else {
-  //         notify.value.error(res.data.msg);
-  //       }
-  //     }).finally(() => {
-  //     });
-  //   }
-  // }).catch(() => {
-  //   // notify.value.error('校验失败');
-  // })
+  // uni.redirectTo({ url: '/pages/index/ai' });
+  formRef.value.validate().then(() => {
+    if(!isRegister.value) {
+      userLogin(formInfo).then((res) => {
+        if (res.data.code === 200) {
+          userInfo.userList.token = res.data.data
+          userInfo.userList.name = ''
+          userInfo.userList.paramValue = ''
+          uni.redirectTo({ url: '/pages/index/ai' });
+        } else {
+          notify.value.show({
+            type: 'error',
+            message: res.data.msg,
+            duration: 1000 * 3,
+            safeAreaInsetTop: true
+          })
+        }
+      }).finally(() => {
+      });
+    } else {
+      userRegister(formInfo).then((res) => {
+        if (res.data.code === 200) {
+          userInfo.userList.token = res.data.data
+          userInfo.userList.name = ''
+          userInfo.userList.paramValue = ''
+          uni.redirectTo({ url: '/pages/index/ai' });
+        } else {
+          notify.value.show({
+            type: 'error',
+            message: res.data.msg,
+            duration: 1000 * 3,
+            safeAreaInsetTop: true
+          })
+        }
+      }).finally(() => {
+      });
+    }
+  }).catch(() => {
+    // notify.value.error('校验失败');
+  })
 }
 
 const isRegister = ref(false)

@@ -8,8 +8,14 @@
 
 <script setup lang="ts">
   import leftpop from '../../components/leftPop.vue'
+  import { userInfoStore } from '@/stores/user'
+
+  const userInfo = userInfoStore()
 
   const logOut = () => {
+    userInfo.userList.token = ''
+    userInfo.userList.name = ''
+    userInfo.userList.paramValue = ''
     uni.redirectTo({ url: '/pages/login/login' });
   }
 </script>
