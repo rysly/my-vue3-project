@@ -1,5 +1,5 @@
 <template>
-  <view class="tool">
+  <view class="tool mt-[182rpx]">
     <leftpop title="软件工具"></leftpop>
     <uv-notify ref="notify"></uv-notify>
 
@@ -18,10 +18,10 @@
       </uv-list>
     </view>
 
-
-		<uv-popup ref="popup" :closeable="true" custom-style="width: 100vw; height: 100vh; margin-top: 10vh">
+		<uv-popup ref="popup" :closeable="true" closeIconPos="top-left" custom-style="width: 100vw; height: 100vh; margin-top: 100rpx; overflow: auto;">
 			<view class="px-[32rpx] py-[32rpx]">
-        <view class="font-bold text-center text-lg">{{ articleTitle }}</view>
+        <view class="font-bold text-center text-lg mt-[60rpx]">{{ articleTitle }}</view>
+        <!-- <view style="height: calc( 100vh - 320rpx );overflow: auto;">{{ articleContent }}</view> -->
         <view>{{ articleContent }}</view>
       </view>
 		</uv-popup>
@@ -72,11 +72,4 @@
 </script>
 
 <style lang="scss" scoped>
-.tool {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 200rpx;
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <view class="file-manage mt-[200rpx]">
+  <view class="file-manage mt-[182rpx]">
     <leftpop title="文章管理"></leftpop>
     <uv-notify ref="notify"></uv-notify>
 
@@ -9,22 +9,24 @@
     </view>
 
     <view class="mt-[32rpx]">
-      <view class="file-list inline-flex items-center h-[90rpx] font-bold">
+      <view class="file-list inline-flex items-center h-[90rpx] font-bold" style="border-bottom: 1px solid #999999;">
         <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">#</view>
         <view class="file-artice inline-block">文件标题/文件类型</view>
         <view class="inline-flex justify-center w-[200rpx]">操作</view>
       </view>
 
-      <view v-for="(item, index) in dataList" class="file-list inline-flex items-center py-[12rpx]" :key="index">
-        <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">{{ ((item.recommend)?'*':'')+ item.id }}</view>
-        <view class="file-artice inline-block">
-          <view class="text-[#3b4144] file-sub">{{ item.articleTitle }}</view>
-          <view class="text-[#999999] text-xs file-sub">{{ item.articleType }}</view>
-        </view>
-        <view class="inline-flex text-[#3c9cff] w-[200rpx] text-sm">
-          <view class="px-[12rpx]" @click="editArticleSub(item)">编辑</view>
-          <view class="text-[#cccccc]">|</view>
-          <view class="px-[12rpx]" @click="deleteArticleSub(item)">删除</view>
+      <view style="height:calc( 100vh - 374rpx ); overflow:auto;">
+        <view v-for="(item, index) in dataList" class="file-list file-list-sub inline-flex items-center py-[12rpx]" :key="index">
+          <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">{{ ((item.recommend)?'*':'')+ item.id }}</view>
+          <view class="file-artice inline-block">
+            <view class="text-[#3b4144] file-sub">{{ item.articleTitle }}</view>
+            <view class="text-[#999999] text-xs file-sub">{{ item.articleType }}</view>
+          </view>
+          <view class="inline-flex text-[#3c9cff] w-[200rpx] text-sm">
+            <view class="px-[12rpx]" @click="editArticleSub(item)">编辑</view>
+            <view class="text-[#cccccc]">|</view>
+            <view class="px-[12rpx]" @click="deleteArticleSub(item)">删除</view>
+          </view>
         </view>
       </view>
 
@@ -46,11 +48,11 @@
           </uv-form-item>
 
           <uv-form-item label="文章标题" prop="articleTitle">
-            <uv-input v-model="formInfo.articleTitle" placeholder="请输入文件标题" customStyle="border-color: #333 !important" />
+            <uv-input v-model="formInfo.articleTitle" placeholder="" customStyle="border-color: #333 !important" />
           </uv-form-item>
 
           <uv-form-item label="文件类型" prop="articleType">
-            <uv-input v-model="formInfo.articleType" placeholder="请输入文件类型" customStyle="border-color: #333 !important" />
+            <uv-input v-model="formInfo.articleType" placeholder="" customStyle="border-color: #333 !important" />
           </uv-form-item>
 
           <uv-form-item label="是否推荐" prop="recommend">
@@ -59,7 +61,7 @@
 
 
           <uv-form-item label="文件内容" prop="articleContent">
-            <uv-textarea v-model="formInfo.articleContent" placeholder="请输入文件内容" count :maxlength="15000"></uv-textarea>
+            <uv-textarea v-model="formInfo.articleContent" placeholder="" count :maxlength="15000" customStyle="border-color: #333 !important"></uv-textarea>
           </uv-form-item>
         </uv-form>
       </view>
@@ -69,12 +71,13 @@
     <!-- 删除 modal -->
     <uv-modal ref="deleteModal" :title="'id为'+id+', 确定要删除此项吗？'" :showCancelButton="true" :asyncClose="true" @confirm="deleteModalConfirm"></uv-modal>
 
+    <uv-loading-page :loading="isLoading" icon-size="50rpx" bgColor="rgba(0,0,0,0.3)"></uv-loading-page>
   </view>
 </template>
 
 <script setup lang="ts">
   import { ref, reactive, onMounted } from 'vue';
-  import leftpop from '../../components/leftPop.vue'
+  import leftpop from '../../components/leftPop.vue';
   import { insertArticle, deleteArticle, updateArticle, queryArticle } from "@/api/fileManage";
 
   const notify = ref()
@@ -132,6 +135,7 @@
   })
 
   const getList = (val:{}) => {
+    isLoading.value = true
     queryArticle(val).then((res) => {
       if (res.data.code === 200) {
         dataList.value = res.data.data
@@ -143,6 +147,7 @@
           safeAreaInsetTop: true
         })
       }
+      isLoading.value = false
     }).finally(() => {
     });
   }
@@ -219,6 +224,7 @@
   }
 
   const newEditModalClose = () => {
+    formRef.value.clearValidate()
     formInfo.id = undefined
     formInfo.articleTitle = ''
     formInfo.articleType = ''
@@ -271,9 +277,14 @@
     getList({})
   }
 
+  const isLoading = ref(false)
+
 </script>
 
 <style lang="scss">
+  .uv-switch {
+    border-color: #afafaf !important;
+  }
 </style>
 
 <style lang="scss" scoped>
@@ -294,6 +305,9 @@
     }
     .file-list:last-child {
       border-bottom: 1px solid #999999;
+    }
+    .file-list-sub:first-child {
+      border-top: none;
     }
     .no-data {
       border-top: 1px solid #999999;
