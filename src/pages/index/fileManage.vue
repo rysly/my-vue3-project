@@ -71,7 +71,7 @@
     <!-- 删除 modal -->
     <uv-modal ref="deleteModal" :title="'id为'+id+', 确定要删除此项吗？'" :showCancelButton="true" :asyncClose="true" @confirm="deleteModalConfirm"></uv-modal>
 
-    <uv-loading-page :loading="isLoading" icon-size="50rpx" bgColor="rgba(0,0,0,0.3)"></uv-loading-page>
+    <uv-loading-page loadingMode="spinner" :loading="isLoading" icon-size="80rpx" bgColor="rgba(0,0,0,0.3)"></uv-loading-page>
   </view>
 </template>
 

@@ -3,8 +3,13 @@
     <leftpop title="lighting AI" @getImg="getAIImg"></leftpop>
     <uv-notify ref="notify"></uv-notify>
 
-    <view style="height: 100%; overflow: auto;">
-      <view v-for="(item, index) in dataList" :style="{'text-align': (item.type === 'keyInput')?'right':'left'}" :key="index">
+
+
+
+
+
+    <scroll-view style="height:calc( 100vh - 300rpx );overflow:auto;" :scroll-y="true" scroll-with-animation :scroll-into-view="toWhichItem">
+      <view v-for="(item, index) in dataList" :style="{'text-align': (item.type === 'keyInput')?'right':'left'}" :key="index" :id="`item-${index}`">
         <view v-if="item.type === 'keyInput'" class="inline-flex justify-end bg-[#bed2db] px-[24rpx] py-[12rpx] mr-[48rpx] mt-[48rpx] rounded-[24rpx]">
           <view class="leading-[52rpx]">{{ item.content }}</view>
         </view>
@@ -16,7 +21,7 @@
           </view>
         </view>
       </view>
-    </view>
+    </scroll-view>
 
     <view class="fixed bottom-[32rpx] px-[32rpx] ai-input">
       <uv-input
@@ -28,11 +33,19 @@
         @confirm="confirmAI"
       ></uv-input>
     </view>
+
+
+
+
+
+
+
+    <uv-loading-page loadingMode="spinner" :loading="isLoading" icon-size="80rpx" bgColor="rgba(0,0,0,0.3)"></uv-loading-page>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, reactive } from 'vue'
+  import { ref, reactive, watch, nextTick } from 'vue'
   import leftpop from '../../components/leftPop.vue'
   import { aiSubmit } from "@/api/ai";
   import srcImg from '@/static/logo.png';
@@ -47,6 +60,21 @@
   }
 
   const notify = ref()
+  const isLoading = ref(false)
+
+  // scroll-into-view指向的id值
+  let toWhichItem = ref('')
+  // 动态更新toWhichItem的值
+  watch(dataList,(newval, oldval)=>{
+    // 重新赋值toWhichItem,延迟到dom更新之后进行，否则没效果
+    nextTick(()=>{
+      toWhichItem.value = "item-" + (newval.length - 1)
+    })
+  },{
+    deep:true, //深度监视
+    immediate:true //初始化立即执行
+  })
+
   const confirmAI = (val:any) => {
     if(val) {
       valueAI.value = ''
@@ -56,6 +84,9 @@
           content: val
         })
       }
+      setTimeout(() => {
+        isLoading.value = true
+      }, 200);
       aiSubmit({content: val}).then((res) => {
         if (res.data.code === 200) {
           if (Array.isArray(dataList.value)) {
@@ -72,6 +103,8 @@
             safeAreaInsetTop: true
           })
         }
+        isLoading.value = false
+
       }).finally(() => {
       });
     }
@@ -80,7 +113,7 @@
   const getAIImg = (val:string) => {
     linkImg.value = val
   }
-  
+
 </script>
 
 <style lang="scss" scoped>
