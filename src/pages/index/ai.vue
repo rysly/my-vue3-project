@@ -3,12 +3,7 @@
     <leftpop title="lighting AI" @getImg="getAIImg"></leftpop>
     <uv-notify ref="notify"></uv-notify>
 
-
-
-
-
-
-    <scroll-view style="height:calc( 100vh - 300rpx );overflow:auto;" :scroll-y="true" scroll-with-animation :scroll-into-view="toWhichItem">
+    <scroll-view style="overflow: auto;" :style="{height: scrollHeight}" :scroll-y="true" scroll-with-animation :scroll-into-view="toWhichItem">
       <view v-for="(item, index) in dataList" :style="{'text-align': (item.type === 'keyInput')?'right':'left'}" :key="index" :id="`item-${index}`">
         <view v-if="item.type === 'keyInput'" class="inline-flex justify-end bg-[#bed2db] px-[24rpx] py-[12rpx] mr-[48rpx] mt-[48rpx] rounded-[24rpx]">
           <view class="leading-[52rpx]">{{ item.content }}</view>
@@ -17,7 +12,7 @@
         <view  v-if="item.type === 'AIreply'" class="inline-flex items-start ml-[48rpx] mt-[48rpx]">
           <uv-image width="48rpx" height="48rpx" :src="linkImg || srcImg" shape="circle"></uv-image>
           <view class="inline-flex justify-start bg-[#dddddd] px-[24rpx] py-[12rpx] ml-[12rpx] mr-[48rpx] rounded-[24rpx]">
-            <view class="leading-[52rpx]">{{ item.content }}</view>
+            <view class="leading-[52rpx] article-content">{{ item.content }}</view>
           </view>
         </view>
       </view>
@@ -34,23 +29,18 @@
       ></uv-input>
     </view>
 
-
-
-
-
-
-
     <uv-loading-page loadingMode="spinner" :loading="isLoading" icon-size="80rpx" bgColor="rgba(0,0,0,0.3)"></uv-loading-page>
   </view>
 </template>
 
 <script setup lang="ts">
-  import { ref, reactive, watch, nextTick } from 'vue'
+  import { ref, reactive, watch, nextTick, onMounted } from 'vue'
   import leftpop from '../../components/leftPop.vue'
   import { aiSubmit } from "@/api/ai";
   import srcImg from '@/static/logo.png';
 
   const valueAI = ref()
+  const scrollHeight = ref()
 
   const dataList = ref<dataList[]>([])
 
@@ -84,15 +74,13 @@
           content: val
         })
       }
-      setTimeout(() => {
-        isLoading.value = true
-      }, 200);
+      isLoading.value = true
       aiSubmit({content: val}).then((res) => {
         if (res.data.code === 200) {
           if (Array.isArray(dataList.value)) {
             dataList.value.push({
               type: 'AIreply',
-              content: res.data.msg
+              content: res.data.msg.replace(/\\n/g, '\n')
             })
           }
         } else {
@@ -102,9 +90,11 @@
             duration: 1000 * 3,
             safeAreaInsetTop: true
           })
+          if(res.data.code === 401) {
+            uni.redirectTo({ url: '/pages/login/login' });
+          }
         }
         isLoading.value = false
-
       }).finally(() => {
       });
     }
@@ -114,11 +104,21 @@
     linkImg.value = val
   }
 
+  // 键盘弹起的处理
+  // 需求拆解：当输入框聚焦的时候获取键盘的高度以及获取底部安全距离，获取键盘的高度设置输入框距离底部的高度，那么scroll-view的高度就等于屏幕的高度-键盘的高度-底部安全距离，再让消息自动滚动到底部就可以了。当输入框失去焦点的时候，还原scroll-view的高度即可
+  onMounted(() => {
+    scrollHeight.value = 'calc( 100vh - 300rpx )'
+  })
+
 </script>
 
 <style lang="scss" scoped>
 .ai-input {
   width: 100%;
   box-sizing: border-box;
+}
+.article-content {
+  white-space: pre-wrap; /* 保留空格和换行，同时允许自动换行 */
+  word-wrap: break-word; /* 当单词长度超过容器宽度时，自动断词 */
 }
 </style>

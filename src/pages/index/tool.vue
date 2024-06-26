@@ -50,6 +50,9 @@
           duration: 1000 * 3,
           safeAreaInsetTop: true
         })
+        if(res.data.code === 401) {
+          uni.redirectTo({ url: '/pages/login/login' });
+        }
       }
     }).finally(() => {
     });
