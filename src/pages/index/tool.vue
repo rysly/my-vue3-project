@@ -22,7 +22,7 @@
 			<view class="px-[32rpx] py-[32rpx]">
         <view class="font-bold text-center text-lg mt-[60rpx]">{{ articleTitle }}</view>
         <!-- <view style="height: calc( 100vh - 320rpx );overflow: auto;">{{ articleContent }}</view> -->
-        <view>{{ articleContent }}</view>
+        <view class="article-content">{{ articleContent }}</view>
       </view>
 		</uv-popup>
 
@@ -72,4 +72,8 @@
 </script>
 
 <style lang="scss" scoped>
+.article-content {
+  white-space: pre-wrap; /* 保留空格和换行，同时允许自动换行 */
+  word-wrap: break-word; /* 当单词长度超过容器宽度时，自动断词 */
+}
 </style>
