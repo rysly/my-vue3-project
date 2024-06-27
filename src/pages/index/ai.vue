@@ -93,7 +93,9 @@
             safeAreaInsetTop: true
           })
           if(res.data.code === 401) {
-            uni.redirectTo({ url: '/pages/login/login' });
+            setTimeout(() => {
+              uni.redirectTo({ url: '/pages/login/login' });
+            }, 3000);
           }
         }
         isLoading.value = false
@@ -106,7 +108,6 @@
     linkImg.value = val
   }
 
-
   // 键盘弹起的处理
   // 需求拆解：当输入框聚焦的时候获取键盘的高度以及获取底部安全距离，获取键盘的高度设置输入框距离底部的高度，那么scroll-view的高度就等于屏幕的高度-键盘的高度-底部安全距离，再让消息自动滚动到底部就可以了。当输入框失去焦点的时候，还原scroll-view的高度即可
   const keyboardHeight = ref(0)
@@ -116,7 +117,6 @@
     uni.onKeyboardHeightChange((res) => {
       keyboardHeight.value = res.height
       // scrollHeight.value = 'calc( 100vh - '+(keyboardHeight.value*2+450)+'rpx )'
-      console.log(555555, keyboardHeight.value)
       if(res.height) {
         // scrollHeight.value = 'calc( 100vh - '+(keyboardHeight.value*2+410)+'rpx )' // 366px 860rpx (keyboardHeight.value*2+410)
         inputBottom.value = keyboardHeight.value+16
@@ -129,7 +129,6 @@
 
   onUnmounted(() => {
     uni.offKeyboardHeightChange() // 页面销毁时移除监听
-    console.log(666666, keyboardHeight.value)
   })
 
 </script>

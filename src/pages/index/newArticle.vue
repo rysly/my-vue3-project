@@ -51,7 +51,9 @@
           safeAreaInsetTop: true
         })
         if(res.data.code === 401) {
-          uni.redirectTo({ url: '/pages/login/login' });
+          setTimeout(() => {
+            uni.redirectTo({ url: '/pages/login/login' });
+          }, 3000);
         }
       }
     }).finally(() => {

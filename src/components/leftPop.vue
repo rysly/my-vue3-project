@@ -10,30 +10,29 @@
 			</template>
 		</uv-navbar>
 
-
 		<uv-popup ref="popup">
 			<view class="pt-[80rpx] w-[500rpx]">
-        <view class="p-[32rpx]" @click="toJump('ai')">lighting AI</view>
-        <view class="p-[32rpx]" v-if="role === 2" @click="toJump('fileManage')">文章管理</view>
+        <view class="px-[40rpx] py-[32rpx] text-[#303133]" @click="toJump('ai')">lighting AI</view>
+        <view class="px-[40rpx] py-[32rpx] text-[#303133]" v-if="role === 2" @click="toJump('fileManage')">文章管理</view>
         <uv-collapse :value="collapseVal">
           <uv-collapse-item title="文章与教程" name="a">
-            <view class="p-[32rpx]" @click="toJump('newArticle')">最新文章</view>
-            <view class="p-[32rpx]" @click="toJump('recommendedArticle')">推荐文章</view>
+            <view class="px-[40rpx] py-[32rpx]" @click="toJump('newArticle')">最新文章</view>
+            <view class="px-[40rpx] py-[32rpx]" @click="toJump('recommendedArticle')">推荐文章</view>
           </uv-collapse-item>
         </uv-collapse>
-        <view class="p-[32rpx]" @click="toJump('tool')">软件工具</view>
-        <view class="p-[32rpx] absolute bottom-[32rpx]" @click="toJump('me')">个人用户: {{ username }}</view>
+        <view class="px-[40rpx] py-[32rpx] text-[#303133]" @click="toJump('tool')">软件工具</view>
+        <view class="px-[32rpx] py-[16rpx] absolute bottom-[108rpx] text-[#303133]" @click="toJump('me')">个人用户: {{ username }}</view>
+        <view class="px-[32rpx] py-[16rpx] absolute bottom-[32rpx] text-[#303133]" @click="logOut">退出登陆</view>
 			</view>
 		</uv-popup>
-
 
   </view>
 </template>
 
 <script setup lang="ts">
   import { ref, toRefs, onMounted } from 'vue';
-import { commonInfo } from "@/api/common";
-import { userInfoStore } from '@/stores/user';
+  import { commonInfo } from "@/api/common";
+  import { userInfoStore } from '@/stores/user';
 
   const toJump = (type:string) => {
     let toUrl = ''
@@ -81,6 +80,14 @@ import { userInfoStore } from '@/stores/user';
 
   const userInfo = userInfoStore()
 
+  const logOut = () => {
+    userInfo.userList.token = ''
+    userInfo.userList.name = ''
+    userInfo.userList.role = 1
+    userInfo.userList.paramValue = ''
+    uni.redirectTo({ url: '/pages/login/login' });
+  }
+
   onMounted(() => {
     if(userInfo.userList.name) {
       username.value = userInfo.userList.name
@@ -104,7 +111,9 @@ import { userInfoStore } from '@/stores/user';
             safeAreaInsetTop: true
           })
           if(res.data.code === 401) {
-            uni.redirectTo({ url: '/pages/login/login' });
+            setTimeout(() => {
+              uni.redirectTo({ url: '/pages/login/login' });
+            }, 3000);
           }
         }
       }).finally(() => {
@@ -115,5 +124,5 @@ import { userInfoStore } from '@/stores/user';
 
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 </style>

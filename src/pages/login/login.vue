@@ -3,7 +3,7 @@
     <uv-notify ref="notify"></uv-notify>
 
     <view>
-      <view class="text-2xl font-bold pb-[32rpx] text-center">知识库小程序</view>
+      <view class="text-2xl font-bold pb-[32rpx] text-center">舞美灯光小程序</view>
       <uv-form ref="formRef" :model="formInfo" :rules="rulesInfo">
         <uv-form-item label="" prop="name">
           <uv-input v-model="formInfo.name" placeholder="请输入姓名" customStyle="border-color: #333 !important" />
@@ -105,7 +105,6 @@ const notify = ref()
 const userInfo = userInfoStore()
 
 const loginBtn = () => {
-  // uni.redirectTo({ url: '/pages/index/ai' });
   formRef.value.validate().then(() => {
     if(!isRegister.value) {
       userLogin(formInfo).then((res) => {

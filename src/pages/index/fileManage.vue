@@ -147,7 +147,9 @@
           safeAreaInsetTop: true
         })
         if(res.data.code === 401) {
-          uni.redirectTo({ url: '/pages/login/login' });
+          setTimeout(() => {
+            uni.redirectTo({ url: '/pages/login/login' });
+          }, 3000);
         }
       }
       isLoading.value = false
@@ -201,7 +203,9 @@
               safeAreaInsetTop: true
             })
             if(res.data.code === 401) {
-              uni.redirectTo({ url: '/pages/login/login' });
+              setTimeout(() => {
+                uni.redirectTo({ url: '/pages/login/login' });
+              }, 3000);
             }
           }
         }).finally(() => {
@@ -220,7 +224,9 @@
               safeAreaInsetTop: true
             })
             if(res.data.code === 401) {
-              uni.redirectTo({ url: '/pages/login/login' });
+              setTimeout(() => {
+                uni.redirectTo({ url: '/pages/login/login' });
+              }, 3000);
             }
           }
         }).finally(() => {
@@ -270,7 +276,9 @@
           safeAreaInsetTop: true
         })
         if(res.data.code === 401) {
-          uni.redirectTo({ url: '/pages/login/login' });
+          setTimeout(() => {
+            uni.redirectTo({ url: '/pages/login/login' });
+          }, 3000);
         }
       }
     }).finally(() => {

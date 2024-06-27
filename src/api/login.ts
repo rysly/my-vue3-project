@@ -6,3 +6,6 @@ export const userLogin = (data:any) => {
 export const userRegister = (data:any) => {
   return httpService.post('/user/register', data);
 };
+export const userUpdatePassword = (data:any) => {
+  return httpService.post('/user/updatePassword', data);
+};
