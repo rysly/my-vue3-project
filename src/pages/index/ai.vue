@@ -1,9 +1,9 @@
 <template>
-  <view class="mt-[160rpx] h-[1000rpx]">
+  <view class="mt-[160rpx]">
     <leftpop title="lighting AI" @getImg="getAIImg"></leftpop>
     <uv-notify ref="notify"></uv-notify>
 
-    <scroll-view style="overflow: auto;" :style="{height: scrollHeight}" :scroll-y="true" scroll-with-animation :scroll-into-view="toWhichItem">
+    <scroll-view style="position: absolute;overflow: auto;height: calc( 100vh - 332rpx );" :style="{bottom: (inputBottom+52)+'px'}" :scroll-y="true" scroll-with-animation :scroll-into-view="toWhichItem">
       <view v-for="(item, index) in dataList" :style="{'text-align': (item.type === 'keyInput')?'right':'left'}" :key="index" :id="`item-${index}`">
         <view v-if="item.type === 'keyInput'" class="inline-flex justify-end bg-[#bed2db] px-[24rpx] py-[12rpx] mr-[48rpx] mt-[48rpx] rounded-[24rpx]">
           <view class="leading-[52rpx]">{{ item.content }}</view>
@@ -18,13 +18,15 @@
       </view>
     </scroll-view>
 
-    <view class="fixed bottom-[32rpx] px-[32rpx] ai-input">
+    <!-- <view class="fixed bottom-[32rpx] px-[32rpx] ai-input"> -->
+    <view class="mt-[32rpx] px-[32rpx] ai-input" :style="{bottom: inputBottom+'px'}">
       <uv-input
         placeholder="请输入"
         border="surround"
         shape="circle"
         v-model="valueAI"
         customStyle="border-color: #333 !important"
+        :adjustPosition="false"
         @confirm="confirmAI"
       ></uv-input>
     </view>
@@ -34,13 +36,13 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, reactive, watch, nextTick, onMounted } from 'vue'
+  import { ref, reactive, watch, nextTick, onMounted, onUnmounted } from 'vue'
   import leftpop from '../../components/leftPop.vue'
   import { aiSubmit } from "@/api/ai";
   import srcImg from '@/static/logo.png';
 
   const valueAI = ref()
-  const scrollHeight = ref()
+  // const scrollHeight = ref()
 
   const dataList = ref<dataList[]>([])
 
@@ -104,10 +106,30 @@
     linkImg.value = val
   }
 
+
   // 键盘弹起的处理
   // 需求拆解：当输入框聚焦的时候获取键盘的高度以及获取底部安全距离，获取键盘的高度设置输入框距离底部的高度，那么scroll-view的高度就等于屏幕的高度-键盘的高度-底部安全距离，再让消息自动滚动到底部就可以了。当输入框失去焦点的时候，还原scroll-view的高度即可
+  const keyboardHeight = ref(0)
+  const inputBottom = ref(16)
+
   onMounted(() => {
-    scrollHeight.value = 'calc( 100vh - 300rpx )'
+    uni.onKeyboardHeightChange((res) => {
+      keyboardHeight.value = res.height
+      // scrollHeight.value = 'calc( 100vh - '+(keyboardHeight.value*2+450)+'rpx )'
+      console.log(555555, keyboardHeight.value)
+      if(res.height) {
+        // scrollHeight.value = 'calc( 100vh - '+(keyboardHeight.value*2+410)+'rpx )' // 366px 860rpx (keyboardHeight.value*2+410)
+        inputBottom.value = keyboardHeight.value+16
+      } else {
+        // scrollHeight.value = 'calc( 100vh - 332rpx )' // 141px 332rpx
+        inputBottom.value = keyboardHeight.value+16
+      }
+    });
+  })
+
+  onUnmounted(() => {
+    uni.offKeyboardHeightChange() // 页面销毁时移除监听
+    console.log(666666, keyboardHeight.value)
   })
 
 </script>
@@ -116,6 +138,7 @@
 .ai-input {
   width: 100%;
   box-sizing: border-box;
+  position: absolute;
 }
 .article-content {
   white-space: pre-wrap; /* 保留空格和换行，同时允许自动换行 */
