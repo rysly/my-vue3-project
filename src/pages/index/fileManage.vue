@@ -17,15 +17,15 @@
 
       <view style="height:calc( 100vh - 374rpx ); overflow:auto;" v-if="dataList.length !== 0">
         <view v-for="(item, index) in dataList" class="file-list file-list-sub inline-flex items-center py-[12rpx]" :key="index">
-          <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">{{ ((item.recommend)?'*':'')+ item.id }}</view>
+          <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">{{ ((item.recommend)?'*':'')+ (index+1) }}</view>
           <view class="file-artice inline-block">
             <view class="text-[#3b4144] file-sub">{{ item.articleTitle }}</view>
             <view class="text-[#999999] text-xs file-sub">{{ item.articleType }}</view>
           </view>
           <view class="inline-flex text-[#3c9cff] w-[200rpx] text-sm">
-            <view class="px-[12rpx]" @click="editArticleSub(item)">编辑</view>
+            <view class="px-[12rpx]" @click="editArticleSub(item, index)">编辑</view>
             <view class="text-[#cccccc]">|</view>
-            <view class="px-[12rpx]" @click="deleteArticleSub(item)">删除</view>
+            <view class="px-[12rpx]" @click="deleteArticleSub(item, index)">删除</view>
           </view>
         </view>
       </view>
@@ -69,7 +69,7 @@
 
 
     <!-- 删除 modal -->
-    <uv-modal ref="deleteModal" :title="'id为'+id+', 确定要删除此项吗？'" :showCancelButton="true" :asyncClose="true" @confirm="deleteModalConfirm"></uv-modal>
+    <uv-modal ref="deleteModal" :title="'序号为'+indexId+', 确定要删除此项吗？'" :showCancelButton="true" :asyncClose="true" @confirm="deleteModalConfirm"></uv-modal>
 
     <uv-loading-page loadingMode="spinner" :loading="isLoading" icon-size="80rpx" bgColor="rgba(0,0,0,0.3)"></uv-loading-page>
   </view>
@@ -161,24 +161,10 @@
     getList({})
   })
 
-  // const dataList = ref([
-  //   {
-  //     id: 1,
-  //     title: '有1哪些软件工具？',
-  //     note: '软件工具',
-  //     content: '11111aahhieieueyuiojhfyguijhguiojhyguyiojkhguyiojhgyuyiojkbhvguijh'
-  //   },
-  //   {
-  //     id: 2,
-  //     title: '有2哪些软件工具？有2哪些软件工具？有2哪些软件工具？',
-  //     note: '软件工具软件工具软件工具软件工具软件工具软件工具软件工具软件工具软件工具软件工具',
-  //     content: '22222aahhieieueyuiojhfyguijhguiojhyguyiojkhguyiojhgyuyiojkbhvguijh'
-  //   }
-  // ])
-
   const newEditModal = ref()
   const deleteModal = ref()
-  const id = ref()
+  const indexId = ref()
+  const houduanId = ref()
   const newEditModalTitle = ref('新增')
   const formRef = ref()
 
@@ -247,8 +233,8 @@
     formInfo.articleContent = ''
   }
 
-  const editArticleSub = (val:any) => {
-    newEditModalTitle.value = val.id + ' 编辑'
+  const editArticleSub = (val:any, index:number) => {
+    newEditModalTitle.value = (index+1) + ' 编辑'
     newEditModal.value.open()
     formInfo.id = val.id
     formInfo.articleTitle = val.articleTitle
@@ -257,13 +243,14 @@
     formInfo.articleContent = val.articleContent
   }
 
-  const deleteArticleSub = (val:any) => {
+  const deleteArticleSub = (val:any, index:number) => {
     deleteModal.value.open()
-    id.value = val.id
+    indexId.value = index+1
+    houduanId.value = val.id
   }
 
   const deleteModalConfirm = () => {
-    deleteArticle({id: id.value}).then((res) => {
+    deleteArticle({id: houduanId.value}).then((res) => {
       if (res.data.code === 200) {
         getList({})
         deleteModal.value.close()
