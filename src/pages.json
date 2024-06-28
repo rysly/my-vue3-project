@@ -10,7 +10,7 @@
 		{
 			"path": "pages/index/ai",
 			"style": {
-				"navigationBarTitleText": "lighting库",
+				"navigationBarTitleText": "舞美知识库",
         		"navigationStyle": "custom"
 			}
 		},

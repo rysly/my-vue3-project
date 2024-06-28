@@ -12,7 +12,7 @@
 
 		<uv-popup ref="popup">
 			<view class="pt-[80rpx] w-[500rpx]">
-        <view class="px-[40rpx] py-[32rpx] text-[#303133]" @click="toJump('ai')">lighting库</view>
+        <view class="px-[40rpx] py-[32rpx] text-[#303133]" @click="toJump('ai')">舞美知识库</view>
         <view class="px-[40rpx] py-[32rpx] text-[#303133]" v-if="role === 2" @click="toJump('fileManage')">文章管理</view>
         <uv-collapse :value="collapseVal">
           <uv-collapse-item title="文章与教程" name="a">

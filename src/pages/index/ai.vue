@@ -1,6 +1,6 @@
 <template>
   <view class="mt-[160rpx]">
-    <leftpop title="lighting库" @getImg="getAIImg"></leftpop>
+    <leftpop title="舞美知识库" @getImg="getAIImg"></leftpop>
     <uv-notify ref="notify"></uv-notify>
 
     <scroll-view style="position: absolute;overflow: auto;height: calc( 100vh - 332rpx );" :style="{bottom: (inputBottom+38+16)+'px'}" :scroll-y="true" scroll-with-animation :scroll-into-view="toWhichItem">
