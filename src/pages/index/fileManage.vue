@@ -37,7 +37,6 @@
     </view>
 
 
-
     <!-- 新增/编辑 modal -->
     <uv-modal ref="newEditModal" :title="newEditModalTitle" :showCancelButton="true" :asyncClose="true" @confirm="newEditModalConfirm" @close="newEditModalClose">
       <view class="slot-content" style="width: 100%;">
@@ -298,7 +297,7 @@
   .file-manage {
     .file-list {
       width: 100%;
-      border-top: 1px solid #999999;
+      border-top: 2rpx solid #999999;
       .file-artice {
         width: calc( 100% - 340rpx );
         .file-sub {
@@ -311,13 +310,13 @@
       }
     }
     .file-list:last-child {
-      border-bottom: 1px solid #999999;
+      border-bottom: 2rpx solid #999999;
     }
     .file-list-sub:first-child {
       border-top: none;
     }
     .no-data {
-      border-top: 1px solid #999999;
+      border-top: 2rpx solid #999999;
     }
   }
 </style>
