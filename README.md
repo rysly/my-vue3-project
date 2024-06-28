@@ -80,4 +80,5 @@ git reset --soft 266a026 (commit撤回)
 ## 知识积累
 - [web-view小程序内嵌网页](https://zh.uniapp.dcloud.io/component/web-view.html)
 - [git提交的问题](https://www.cnblogs.com/runningGY/p/15147879.html)
+- [Hubuilder打包问题](https://www.cnblogs.com/sugartang/p/17168196.html)
 
