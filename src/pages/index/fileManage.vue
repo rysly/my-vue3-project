@@ -15,7 +15,7 @@
         <view class="inline-flex justify-center w-[200rpx]">操作</view>
       </view>
 
-      <view style="height:calc( 100vh - 374rpx ); overflow:auto;">
+      <view style="height:calc( 100vh - 374rpx ); overflow:auto;" v-if="dataList.length !== 0">
         <view v-for="(item, index) in dataList" class="file-list file-list-sub inline-flex items-center py-[12rpx]" :key="index">
           <view class="inline-flex justify-center px-[12rpx] w-[140rpx]">{{ ((item.recommend)?'*':'')+ item.id }}</view>
           <view class="file-artice inline-block">

@@ -10,7 +10,7 @@
 		{
 			"path": "pages/index/ai",
 			"style": {
-				"navigationBarTitleText": "lighting AI",
+				"navigationBarTitleText": "lighting库",
         		"navigationStyle": "custom"
 			}
 		},
