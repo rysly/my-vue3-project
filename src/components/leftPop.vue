@@ -12,7 +12,9 @@
 
 		<uv-popup ref="popup">
 			<view class="pt-[80rpx] w-[500rpx]">
-        <view class="px-[40rpx] py-[32rpx] text-[#303133]" @click="toJump('ai')">舞美知识库</view>
+        <view v-if="aiOpen" class="px-[40rpx] py-[32rpx] text-[#303133]" @click="toJump('ai')">舞美知识库</view>
+        <view v-else class="px-[40rpx] py-[32rpx] text-[#303133]">舞美知识库</view>
+
         <view class="px-[40rpx] py-[32rpx] text-[#303133]" v-if="role === 2" @click="toJump('fileManage')">文章管理</view>
         <uv-collapse :value="collapseVal">
           <uv-collapse-item title="文章与教程" name="a">
@@ -75,6 +77,7 @@
   const notify = ref()
   const username = ref()
   const role = ref() // 1是普通，2是管理员
+  const aiOpen = ref(false) // true，false
 
   const emits = defineEmits(['getImg'])
 
@@ -84,6 +87,7 @@
     userInfo.userList.token = ''
     userInfo.userList.name = ''
     userInfo.userList.role = 1
+    userInfo.userList.aiOpen = false
     userInfo.userList.paramValue = ''
     uni.redirectTo({ url: '/pages/login/login' });
   }
@@ -92,6 +96,7 @@
     if(userInfo.userList.name) {
       username.value = userInfo.userList.name
       role.value = userInfo.userList.role
+      aiOpen.value = userInfo.userList.aiOpen
       emits('getImg', userInfo.userList.paramValue)
     } else {
       commonInfo({}).then((res) => {
@@ -99,9 +104,11 @@
           userInfo.userList.name = res.data.data.name
           userInfo.userList.paramValue = res.data.data.paramValue
           userInfo.userList.role = res.data.data.role
+          userInfo.userList.aiOpen = res.data.data.aiOpen
 
           username.value = res.data.data.name
           role.value = res.data.data.role
+          aiOpen.value = res.data.data.aiOpen
           emits('getImg', res.data.data.paramValue)
         } else {
           notify.value.show({
