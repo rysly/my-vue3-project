@@ -23,8 +23,11 @@
 - [tailwindcss](https://tailwindcss.com/) - 方便的写 css
 - [luch-request](https://www.quanzhan.co/luch-request/)
 
-- [.editorconfig文件](http://editorconfig.org)
-- [.prettierrc.cjs](https://prettier.io/docs/en/)
+- [.editorconfig文件](http://editorconfig.org) - 可帮助多个开发人员在不同的编辑器和 IDE 上维护同一个项目的一致编码风格
+- [.prettierrc.cjs](https://prettier.io/docs/en/) - Prettier 是一款功能强大的代码格式化程序
+- [ESLint](https://zh-hans.eslint.org/docs/latest/use/getting-started) -ESLint 是一个根据方案识别并报告 ECMAScript/JavaScript 代码问题的工具，其目的是使代码风格更加一致并避免错误
+- [stylelint](https://www.stylelint.cn/) - Stylelint 是一个强大、先进的 CSS 代码检查器（linter），可以帮助你规避 CSS 代码中的错误并保持一致的编码风格
+- [ husky + lint-staged + commitlint] -husky可以防止使用 Git hooks 的一些不好的 commit 或者 push。
 
 ## Install and use
 
