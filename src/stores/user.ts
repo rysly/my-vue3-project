@@ -13,7 +13,7 @@ import { ref, reactive } from 'vue';
 //   },
 // });
 
-// export const useCounterStore = defineStore('counter', 
+// export const useCounterStore = defineStore('counter',
 //   () => {
 //     const count = ref(0)
 //     function increment() {
@@ -26,7 +26,7 @@ import { ref, reactive } from 'vue';
 //   }
 // );
 
-export const userInfoStore = defineStore('userInfo', 
+export const userInfoStore = defineStore('userInfo',
   () => {
     // const userList = ref<userList{}>({})
     //  interface userList {
@@ -39,6 +39,7 @@ export const userInfoStore = defineStore('userInfo',
       token: '',
       name: '',
       role: 1, // 1是普通，2是管理员
+      aiOpen: false,
       paramValue: '' // AI界面回答者头像图片
     })
     return { userList }

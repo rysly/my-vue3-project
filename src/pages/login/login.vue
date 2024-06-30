@@ -33,6 +33,7 @@
 import { ref, reactive } from 'vue';
 import { onReady } from '@dcloudio/uni-app'
 import { userLogin, userRegister } from "@/api/login";
+import { commonInfo } from "@/api/common";
 import { userInfoStore } from '@/stores/user';
 // import { useCounterStore } from '@/stores/counter';
 
@@ -57,11 +58,11 @@ const rulesInfo = reactive({
       trigger: ['blur', 'change']
     },
     {
-			pattern: /^[a-zA-Z]{5,9}$/,
+			pattern: /^[a-zA-Z]{5,20}$/,
 			transform(value:any) {
 				return String(value);
 			},
-			message: '只能包含5-9位字母'
+			message: '只能包含5-20位字母'
 		}
   ],
   'password': [
@@ -112,7 +113,15 @@ const loginBtn = () => {
           userInfo.userList.token = res.data.data
           userInfo.userList.name = ''
           userInfo.userList.paramValue = ''
-          uni.redirectTo({ url: '/pages/index/ai' });
+          commonInfo({}).then((res) => {
+            if (res.data.code === 200) {
+              if(res.data.data.aiOpen) {
+                uni.redirectTo({ url: '/pages/index/ai' });
+              } else {
+                uni.redirectTo({ url: '/pages/index/newArticle' });
+              }
+            }
+          })
         } else {
           notify.value.show({
             type: 'error',
@@ -129,7 +138,15 @@ const loginBtn = () => {
           userInfo.userList.token = res.data.data
           userInfo.userList.name = ''
           userInfo.userList.paramValue = ''
-          uni.redirectTo({ url: '/pages/index/ai' });
+          commonInfo({}).then((res) => {
+            if (res.data.code === 200) {
+              if(res.data.data.aiOpen) {
+                uni.redirectTo({ url: '/pages/index/ai' });
+              } else {
+                uni.redirectTo({ url: '/pages/index/newArticle' });
+              }
+            }
+          })
         } else {
           notify.value.show({
             type: 'error',
