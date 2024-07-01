@@ -4,7 +4,7 @@ import { userInfoStore } from '@/stores/user'
 const userInfo = userInfoStore()
 
 const httpService = new Request({
-  baseURL: 'https://www.xyfuye.com/', // http://121.37.128.28/  http://120.46.46.120/  https://www.xyfuye.com/
+  baseURL: 'http://121.37.128.28/', // http://121.37.128.28/  http://120.46.46.120/  https://www.xyfuye.com/
   header: {}
 })
 

@@ -21,6 +21,8 @@
       <view class="mt-[24rpx] float-right text-[#3c9cff] text-[28rpx]" @click="loginChangeRegister">
         {{ isRegister?'登陆账号':'注册新账号' }}
       </view>
+
+      <view class="mt-[24rpx] text-[#3c9cff] text-[28rpx]" @click="thirdLogin">第三方登陆</view>
     </view>
 
     <!-- <text>Current Count: {{ counter.count }}</text> -->
@@ -31,7 +33,6 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue';
-import { onReady } from '@dcloudio/uni-app'
 import { userLogin, userRegister } from "@/api/login";
 import { commonInfo } from "@/api/common";
 import { userInfoStore } from '@/stores/user';
@@ -176,6 +177,38 @@ const loginChangeRegister = () => {
 //   linkVal.value = "https://www.baidu.com/"
 // }
 
+const thirdLogin = () => {
+  uni.login({
+    provider: 'weixin',
+    success: function (res) {
+      console.log('登录成功', res.code);
+      // 获取到用户的 code 之后，向自己的服务器发送请求，使用这个 code 换取 openId, sessionKey, unionId 等信息
+    },
+    fail: function (err) {
+      console.log('登录失败', err);
+    }
+  })
+  // uni.login({
+  //   provider: 'univerify',
+  //   univerifyStyle: {
+  //     fullScreen: true
+  //   }
+  // })
+  // wx.login({
+  //   success (res) {
+  //     if (res.code) {
+  //       wx.request({
+  //         url: 'https://example.com/onLogin',
+  //         data: {
+  //           code: res.code
+  //         }
+  //       })
+  //     } else {
+  //       console.log('登录失败！' + res.errMsg)
+  //     }
+  //   }
+  // })
+}
 
 
 
